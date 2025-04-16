@@ -126,9 +126,10 @@ create_time_series_target_data <- function(weekly_data, location_data) {
     dplyr::inner_join(location_data, by = c("location_name"))
   time_series_wk_inc <- cbind(
     data.frame(target = "wk inc flu hosp"),
-    weekly_data[c("date", "location", "value", "weekly_rate", "as_of")]
+    weekly_data[c("date", "location", "location_name", "value", "weekly_rate", "as_of")]
   )
-  colnames(time_series_wk_inc) <- c("target", "target_end_date", "location", "observation", "weekly_rate", "as_of")
+  colnames(time_series_wk_inc) <- c(
+    "target", "target_end_date", "location", "location_name", "observation", "weekly_rate", "as_of")
 
   time_series_wk_inc
 }
@@ -509,7 +510,7 @@ create_target_data <- function(as_of = NULL, include_after = "2024-11-01", targe
   as_of <- weekly_data_all$as_of[1]
 
   # Specify sort order for target data files (not absolutely necessary, but helps human readibility and diffs)
-  time_series_col_order <- c("as_of", "target", "target_end_date", "location")
+  time_series_col_order <- c("as_of", "target", "target_end_date", "location", "location_name")
   oracle_col_order <- c("as_of", "target", "target_end_date", "location", "horizon", "output_type_id")
 
   # create time series data and append to existing file
