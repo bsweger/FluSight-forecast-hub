@@ -527,8 +527,7 @@ create_target_data <- function(as_of = NULL, include_after = "2024-11-01", targe
 
   # Create oracle output data
   oracle_output_target <- create_oracle_output_target_data(time_series_target)
-  oracle_output_target <- oracle_output_target[do.call(
-    order, oracle_output_target[, oracle_col_order, drop = FALSE]), ]
+  oracle_output_target <- low_rent_arrange(oracle_output_target, oracle_col_order)
 
   # Re-order the target-data columns to reflect the files' sort order
   updated_time_series <- updated_time_series |>
