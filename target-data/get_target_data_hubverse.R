@@ -535,8 +535,6 @@ create_target_data <- function(as_of = NULL, include_after = "2024-11-01", targe
   oracle_output_target <- oracle_output_target |>
     dplyr::select(all_of(oracle_col_order), everything())
 
-  # updated_time_series <- updated_time_series[do.call(
-  #   order, updated_time_series[, time_series_col_order, drop = FALSE]), ]
  # Write updated target data files
   if (!dir.exists(time_series_path)) {
     dir.create(time_series_path, recursive = TRUE)
